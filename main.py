@@ -19,6 +19,7 @@ class Registro(Frame):
 
         self.id = StringVar()
         self.nombre = StringVar()
+        self.apellido = StringVar()
         self.correo = StringVar()
         self.area = StringVar()
         self.userred = StringVar()
@@ -28,25 +29,27 @@ class Registro(Frame):
         self.base_datos = Registro_datos()
         self.create_wietgs()
         
-        
+    #Entradas y botones    
     def create_wietgs(self):
         
         Label(self.frame1, text = '\tF Q C O N T R O L  \t ',bg='#3853FF',fg='white', font=('Orbitron',15,'bold')).grid(column=0, row=0)
         
-        Label(self.frame2, text = 'Agregar FQCitos/a',fg='white', bg ='#FF662C', font=('Rockwell',12,'bold')).grid(columnspan=2, column=0,row=0, pady=5)
+        Label(self.frame2, text = 'Agregar FQCito/a',fg='white', bg ='#FF662C', font=('Rockwell',12,'bold')).grid(columnspan=2, column=0,row=0, pady=5)
         Label(self.frame2, text = 'Nombre',fg='white', bg ='navy', font=('Rockwell',13,'bold')).grid(column=0,row=1, pady=15)
-        Label(self.frame2, text = 'Correo',fg='white', bg ='navy', font=('Rockwell',13,'bold')).grid(column=0,row=2, pady=15)
-        Label(self.frame2, text = 'Area',fg='white', bg ='navy', font=('Rockwell',13,'bold')).grid(column=0,row=3, pady=15)
-        Label(self.frame2, text = 'UserRed', fg='white',bg ='navy', font=('Rockwell',13,'bold')).grid(column=0,row=4, pady=15)
-        Label(self.frame2, text = 'IDAnydesk', fg='white',bg ='navy', font=('Rockwell',13,'bold')).grid(column=0,row=5, pady=15)
+        Label(self.frame2, text = 'Apellido',fg='white', bg ='navy', font=('Rockwell',13,'bold')).grid(column=0,row=2, pady=15)
+        Label(self.frame2, text = 'Correo',fg='white', bg ='navy', font=('Rockwell',13,'bold')).grid(column=0,row=3, pady=15)
+        Label(self.frame2, text = 'Area',fg='white', bg ='navy', font=('Rockwell',13,'bold')).grid(column=0,row=4, pady=15)
+        Label(self.frame2, text = 'UserRed', fg='white',bg ='navy', font=('Rockwell',13,'bold')).grid(column=0,row=5, pady=15)
+        Label(self.frame2, text = 'IDAnydesk', fg='white',bg ='navy', font=('Rockwell',13,'bold')).grid(column=0,row=6, pady=15)
         
-
+        #Entradas de texto
         Entry(self.frame2,textvariable=self.nombre , font=('Arial Baltic',12)).grid(column=1,row=1, padx =5)
         Entry(self.frame2,textvariable=self.correo , font=('Arial Baltic',12)).grid(column=1,row=2, padx= 5)
         Entry(self.frame2,textvariable=self.area , font=('Arial Baltic sans',12)).grid(column=1,row=3)
         Entry(self.frame2,textvariable=self.userred , font=('Arial Baltic',12)).grid(column=1,row=4)
         Entry(self.frame2,textvariable=self.idanydesk , font=('Arial Baltic',12)).grid(column=1,row=5)
-       
+        Entry(self.frame2,textvariable=self.idanydesk , font=('Arial Baltic',12)).grid(column=1,row=6)
+
         Label(self.frame4, text = 'Opciones',fg='white', bg ='#7EB1FC', font=('Rockwell',12,'bold')).grid(columnspan=3, column=0,row=0, pady=1, padx=4)         
         Button(self.frame4,command= self.agregar_datos, text='REGISTRAR', font=('Arial Baltic',10,'bold'), bg='#32B2FC').grid(column=0,row=1, pady=10, padx=4)
         Button(self.frame4,command = self.limpiar_datos, text='LIMPIAR ENTRADA', font=('Arial Baltic',10,'bold'), bg='#32B2FC').grid(column=1,row=1, padx=10)        
@@ -70,18 +73,19 @@ class Registro(Frame):
         self.tabla['columns'] = ('Nombre', 'Correo', 'Area', 'UserRed','idanydesk')
 
         self.tabla.column('#0', minwidth=100, width=120, anchor='center')
-        self.tabla.column('Nombre', minwidth=100, width=120 , anchor='center')
-        self.tabla.column('Correo', minwidth=100, width=120, anchor='center' )
-        self.tabla.column('Area', minwidth=100, width=120 , anchor='center')
-        self.tabla.column('UserRed', minwidth=100, width=105, anchor='center')
-        self.tabla.column('idanydesk', minwidth=100, width=105, anchor='center')
+        self.tabla.column('#1', minwidth=100, width=120, anchor='center' )
+        self.tabla.column('#2', minwidth=100, width=120, anchor='center')
+        self.tabla.column('#3', minwidth=100, width=120 , anchor='center')
+        self.tabla.column('#4', minwidth=100, width=105, anchor='center')
+        self.tabla.column('#5', minwidth=100, width=105, anchor='center')
 
-        self.tabla.heading('#0', text='ID', anchor ='center')
-        self.tabla.heading('Nombre', text='Nombre', anchor ='center')
-        self.tabla.heading('Correo', text='Correo', anchor ='center')
-        self.tabla.heading('Area', text='Area', anchor ='center')
-        self.tabla.heading('UserRed', text='UserRed', anchor ='center')
-        self.tabla.heading('idanydesk', text='IDanydesk', anchor ='center')
+        self.tabla.heading('#0', text='Nombre', anchor ='center')
+        self.tabla.heading('#1', text='Apellido', anchor ='center')
+        self.tabla.heading('#2', text='Correo', anchor ='center')
+        self.tabla.heading('#3', text='Area', anchor ='center')
+        self.tabla.heading('#4', text='UserRed', anchor ='center')
+        self.tabla.heading('#5', text='IDAnydesk', anchor ='center')
+        
 
 
         estilo = ttk.Style(self.frame3)
@@ -92,16 +96,14 @@ class Registro(Frame):
 
         self.tabla.bind("<<TreeviewSelect>>", self.obtener_fila)  # seleccionar  fila
     
-    '''
-    def ajustes(self):
-        self.paginas.select([self.frame4])
-    '''    
+   
     
 
     def agregar_datos(self):
         self.tabla.get_children()
         id = self.id.get()
         nombre = self.nombre.get()
+        apellido = self.apellido.get()
         correo = self.correo.get()
         area = self.area.get()
         userred = self.userred.get()
@@ -115,6 +117,7 @@ class Registro(Frame):
     def limpiar_datos(self):
         self.tabla.delete(*self.tabla.get_children())
         self.nombre.set('')
+        self.apellido.set('')
         self.correo.set('')
         self.area.set('')
         self.userred.set('')
@@ -128,7 +131,7 @@ class Registro(Frame):
         i = -1
         for datos in nombre_buscado:
             i= i+1                       
-            self.tabla.insert('',i, text = nombre_buscado[i][1:2], values=nombre_buscado[i][2:6])
+            self.tabla.insert('',i, text = nombre_buscado[i][1:2], values=nombre_buscado[i][2:7])
 
 
     def mostrar_todo(self):

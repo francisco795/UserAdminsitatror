@@ -3,17 +3,17 @@ import mysql.connector  #pip install mysql-connector-python
 class Registro_datos():
 
     def __init__(self):
-        self.conexion = mysql.connector.connect( host='localhost',
-                                            database ='tu_base', 
+        self.conexion = mysql.connector.connect( host='127.0.0.1',
+                                            database ='fqc1', 
                                             user = 'root',
                                             password ='')
 
 
 
-    def inserta_usuario(self,id,nombre, correo, area, userred,idanydesk):
+    def inserta_usuario(self,id,nombre, apellido,correo, area, userred,idanydesk):
         cur = self.conexion.cursor()
-        sql='''INSERT INTO users (ID, NOMBRE, CORREO, AREA, USERRED, IDANYDESK) 
-        VALUES(NULL,'{}', '{}','{}', '{}','{}')'''.format(id, nombre, correo, area, userred, idanydesk)
+        sql='''INSERT INTO users (ID, NOMBRE,APELLIDO, CORREO, AREA, USERRED, IDANYDESK) 
+        VALUES(NULL,'{}', '{}','{}','{}', '{}','{}')'''.format(id, nombre, apellido, correo, area, userred, idanydesk)
         cur.execute(sql)
         self.conexion.commit()    
         cur.close()
